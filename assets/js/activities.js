@@ -3,7 +3,7 @@ const activities = [
     id: 'sea-walking',
     title: 'Sea Walking',
     price: 'RM 250 / pax',
-    image: 'sea-world-adventure-thumb.webp',
+    image: 'assets/images/sea-world-adventure-thumb.webp',
     badge: 'Popular',
     description: 'Bring the whole family along – mom, dad, the kids, and even grandpa! It\'s an adventure everyone can enjoy together. Suitable for ages 10 and up, up to six people can take part at once. Ladies, no need to fret about your makeup – you\'ll stay completely dry from the neck up!',
     features: [
