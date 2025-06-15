@@ -21,179 +21,267 @@
     }
 
     @keyframes zoomInOut {
-      0% {
-        transform: scale(1);
-      }
-      50% {
-        transform: scale(1.1);
-      }
-      100% {
-        transform: scale(1);
-      }
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
     }
 
     .marine-bg-animation {
-    background: linear-gradient(120deg, #004e92, #000428);
-    background-size: 200% 200%;
-    animation: marine 10s ease infinite;
-  }
+      background: linear-gradient(120deg, #004e92, #000428);
+      background-size: 200% 200%;
+      animation: marine 10s ease infinite;
+    }
 
-  @keyframes marine {
-    0% {
-      background-position: 0% 50%;
+    @keyframes marine {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
-    50% {
-      background-position: 100% 50%;
-    }
-    100% {
-      background-position: 0% 50%;
-    }
-  }
 
-  /* Modal Transition */
-  #activityModal {
-    opacity: 0;
-    transition: opacity 0.3s ease-in-out;
-  }
-  #activityModal.open {
-    opacity: 1;
-  }
-  
-  /* Prevent scrolling when modal is open */
-  body.modal-open {
-    overflow: hidden;
-  }
+    /* Smooth scrolling */
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #f1f1f1;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #888;
+      border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: #555;
+    }
   </style>
 </head>
-<body class="relative">
+<body class="relative bg-gray-50">
+  <!-- Navigation Bar -->
+  <nav class="w-full marine-bg-animation fixed top-0 z-50 shadow-lg" x-data="{ isOpen: false }">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        <div class="flex items-center">
+          <div class="flex-shrink-0">
+            <img src="https://www.jskborneoreef.my/assets/images/br-logo-02-new-418x268.webp" alt="JSK Borneo Reef Logo" class="h-10">
+          </div>
+        </div>
+        
+        <!-- Mobile menu button -->
+        <div class="md:hidden">
+          <button @click="isOpen = !isOpen" class="text-white hover:text-gray-200 focus:outline-none">
+            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path x-show="!isOpen" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+              <path x-show="isOpen" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+            </svg>
+          </button>
+        </div>
 
-<!-- Top Navigation Bar -->
-<!-- <nav class="w-full text-gray-700 marine-bg-animation bg-white dark-mode:text-gray-200 dark-mode:bg-gray-800 p-4 fixed top-0 z-20 shadow-lg">
-  <div x-data="{ open: false }" class="flex flex-col max-w-screen-xl px-4 mx-auto md:items-center md:justify-between md:flex-row md:px-6 lg:px-8">
-    <div class="flex flex-grow items-center justify-center p-4">
-      <div class="flex items-center justify-center">
-        <img src="https://www.jskborneoreef.my/assets/images/br-logo-02-new-418x268.webp" alt="JSK Borneo Reef Logo" class="h-10">
+        <!-- Desktop menu -->
+        <div class="hidden md:block">
+          <div class="ml-10 flex items-baseline space-x-4">
+            <a href="#home" class="text-white hover:text-gray-200 px-3 py-2 rounded-md text-sm font-medium">Home</a>
+            <a href="#activities" class="text-white hover:text-gray-200 px-3 py-2 rounded-md text-sm font-medium">Activities</a>
+            <a href="https://jskborneoreef.my" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md text-sm font-medium transition duration-300">Book Now</a>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</nav> -->
 
+    <!-- Mobile menu -->
+    <div x-show="isOpen" class="md:hidden" x-transition>
+      <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+        <a href="#home" class="text-white hover:text-gray-200 block px-3 py-2 rounded-md text-base font-medium">Home</a>
+        <a href="#activities" class="text-white hover:text-gray-200 block px-3 py-2 rounded-md text-base font-medium">Activities</a>
+        <a href="https://jskborneoreef.my" class="bg-blue-500 hover:bg-blue-600 text-white block px-3 py-2 rounded-md text-base font-medium">Book Now</a>
+      </div>
+    </div>
+  </nav>
 
   <!-- Main Content Section -->
-  <div class="pt-24 p-4">
-<!-- Banner Section with Image and Text Overlay -->
-<div class="banner-section mb-12 border-b-4 border-gray-300 pb-4 relative">
-  <div class="w-full h-64 rounded-lg overflow-hidden shadow-lg relative">
-    <img src="brsw-panorama.webp" alt="JSK Borneo Reef Panorama" class="w-full h-full object-cover zoom-banner">
-    <!-- Dark Overlay -->
-    <div class="absolute inset-0 bg-black bg-opacity-50"></div>
-    <!-- Banner Text and Button -->
-    <div class="absolute inset-0 flex flex-col items-center justify-center space-y-4">
-      <h1 class="text-white text-3xl md:text-4xl font-bold text-center">
-        Welcome To <br>
-        <span class="logo-color">JSK Borneo Reef Sea World</span>
-      </h1>
-      <!-- Book Now Button -->
-      <a href="https://jskborneoreef.my" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-lg shadow-lg transition duration-300 ease-in-out transform hover:scale-105">
-        Home
-      </a>
+  <div class="pt-16">
+    <!-- Banner Section -->
+    <div id="home" class="banner-section relative">
+      <div class="w-full h-[60vh] md:h-[70vh] relative overflow-hidden">
+        <img src="brsw-panorama.webp" alt="JSK Borneo Reef Panorama" class="w-full h-full object-cover zoom-banner">
+        <div class="absolute inset-0 bg-black bg-opacity-50"></div>
+        <div class="absolute inset-0 flex flex-col items-center justify-center space-y-6 px-4">
+          <h1 class="text-white text-4xl md:text-6xl font-bold text-center leading-tight">
+            Welcome To <br>
+            <span class="logo-color">JSK Borneo Reef Sea World</span>
+          </h1>
+          <p class="text-white text-lg md:text-xl text-center max-w-2xl">
+            Experience the wonders of marine life and exciting water activities
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4">
+            <a href="https://jskborneoreef.my" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-8 rounded-lg shadow-lg transition duration-300 ease-in-out transform hover:scale-105 text-center">
+              Book Now
+            </a>
+            <a href="#activities" class="bg-white hover:bg-gray-100 text-blue-500 font-bold py-3 px-8 rounded-lg shadow-lg transition duration-300 ease-in-out transform hover:scale-105 text-center">
+              Explore Activities
+            </a>
+          </div>
+        </div>
+      </div>
     </div>
+
+    <!-- Activities Section -->
+    <section id="activities" class="container mx-auto px-4 py-16 md:py-24">
+      <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-gray-800">Our Activities</h2>
+      
+      <!-- Sea Walking Card -->
+      <article class="flex flex-col md:flex-row shadow-xl rounded-2xl overflow-hidden mx-auto max-w-4xl group transform duration-500 hover:-translate-y-1 hover:shadow-2xl transition-all ease-in-out bg-white mb-12">
+        <div class="md:w-1/2 relative">
+          <img class="w-full h-64 md:h-full object-cover transition-transform duration-300 ease-in-out group-hover:scale-105" src="seawalking.webp" alt="Sea Walking">
+          <div class="absolute top-4 left-4 bg-blue-500 text-white px-4 py-2 rounded-full text-sm font-semibold">
+            Popular
+          </div>
+        </div>
+        <div class="md:w-1/2 p-6 md:p-8">
+          <h3 class="text-2xl md:text-3xl font-bold text-gray-800 mb-4 group-hover:text-blue-600 transition-colors duration-300">Sea Walking</h3>
+          <p class="text-lg text-gray-600 mb-4">
+            <span class="text-gray-900 font-bold">from RM 250 / pax</span>
+          </p>
+          <p class="text-gray-600 mb-6">
+            Bring the whole family along – mom, dad, the kids, and even grandpa! It's an adventure everyone can enjoy together. Suitable for ages 10 and up, up to six people can take part at once. Ladies, no need to fret about your makeup – you'll stay completely dry from the neck up!
+          </p>
+          <div class="space-y-4">
+            <div class="flex items-center text-gray-600">
+              <svg class="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+              </svg>
+              <span>Suitable for ages 10 and up</span>
+            </div>
+            <div class="flex items-center text-gray-600">
+              <svg class="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+              </svg>
+              <span>Up to 6 people per session</span>
+            </div>
+            <div class="flex items-center text-gray-600">
+              <svg class="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+              </svg>
+              <span>Stay dry from neck up</span>
+            </div>
+          </div>
+          <div class="mt-8">
+            <a href="https://booking.jskborneoreef.my/JSKBR/VisitDate.aspx?PageCode=ADDON" class="block w-full bg-blue-500 hover:bg-blue-600 text-white text-center font-bold py-3 px-6 rounded-lg shadow-md transition duration-300 transform hover:scale-105">
+              Book Now
+            </a>
+          </div>
+          <p class="mt-4 text-sm text-gray-500">
+            Note: Children under 18 years old must be accompanied by a parent or guardian. Minimum age requirement: 8 years old.
+          </p>
+        </div>
+      </article>
+
+      <!-- Ocean Escapade Card -->
+      <article class="flex flex-col md:flex-row shadow-xl rounded-2xl overflow-hidden mx-auto max-w-4xl group transform duration-500 hover:-translate-y-1 hover:shadow-2xl transition-all ease-in-out bg-white">
+        <div class="md:w-1/2 relative">
+          <img class="w-full h-64 md:h-full object-cover transition-transform duration-300 ease-in-out group-hover:scale-105" src="watersport.webp" alt="Watersport Activity">
+          <div class="absolute top-4 left-4 bg-green-500 text-white px-4 py-2 rounded-full text-sm font-semibold">
+            Best Value
+          </div>
+        </div>
+        <div class="md:w-1/2 p-6 md:p-8">
+          <h3 class="text-2xl md:text-3xl font-bold text-gray-800 mb-4 group-hover:text-blue-600 transition-colors duration-300">Ocean Escapade</h3>
+          <p class="text-lg text-gray-600 mb-4">
+            <span class="text-gray-900 font-bold">from RM 139 / pax</span>
+          </p>
+          <p class="text-gray-600 mb-6">
+            Activities include kayaking, snorkeling, water inflatable courses, and more. Get ready for a day full of excitement with our water adventure package, perfect for both thrill-seekers and those looking for a relaxing time on the water.
+          </p>
+          <div class="space-y-4">
+            <div class="flex items-center text-gray-600">
+              <svg class="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+              </svg>
+              <span>Multiple activities included</span>
+            </div>
+            <div class="flex items-center text-gray-600">
+              <svg class="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+              </svg>
+              <span>Perfect for all ages</span>
+            </div>
+            <div class="flex items-center text-gray-600">
+              <svg class="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+              </svg>
+              <span>Equipment provided</span>
+            </div>
+          </div>
+          <div class="mt-8">
+            <a href="https://booking.jskborneoreef.my/JSKBR/VisitDate.aspx?PageCode=ADDON" class="block w-full bg-blue-500 hover:bg-blue-600 text-white text-center font-bold py-3 px-6 rounded-lg shadow-md transition duration-300 transform hover:scale-105">
+              Book Now
+            </a>
+          </div>
+          <p class="mt-4 text-sm text-gray-500">
+            Note: Children under 18 years old must be accompanied by a parent or guardian. Minimum age requirement: 8 years old.
+          </p>
+        </div>
+      </article>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+      <div class="container mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div>
+            <h3 class="text-xl font-bold mb-4">Contact Us</h3>
+            <p class="mb-2">JSK Borneo Reef Sea World</p>
+            <p class="mb-2">Kota Kinabalu, Sabah</p>
+            <p class="mb-2">Malaysia</p>
+          </div>
+          <div>
+            <h3 class="text-xl font-bold mb-4">Quick Links</h3>
+            <ul class="space-y-2">
+              <li><a href="#home" class="hover:text-blue-400 transition-colors">Home</a></li>
+              <li><a href="#activities" class="hover:text-blue-400 transition-colors">Activities</a></li>
+              <li><a href="https://jskborneoreef.my" class="hover:text-blue-400 transition-colors">Book Now</a></li>
+            </ul>
+          </div>
+          <div>
+            <h3 class="text-xl font-bold mb-4">Follow Us</h3>
+            <div class="flex space-x-4">
+              <a href="#" class="hover:text-blue-400 transition-colors">
+                <i class="fab fa-facebook-f"></i>
+              </a>
+              <a href="#" class="hover:text-blue-400 transition-colors">
+                <i class="fab fa-instagram"></i>
+              </a>
+              <a href="#" class="hover:text-blue-400 transition-colors">
+                <i class="fab fa-twitter"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="border-t border-gray-800 mt-8 pt-8 text-center">
+          <p>&copy; 2024 JSK Borneo Reef Sea World. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
   </div>
-</div>
 
-<section class="container mx-auto p-10 md:p-20 antialiased">
-    <!-- Article 1 -->
-    <article class="flex flex-wrap md:flex-nowrap shadow-lg mx-auto max-w-3xl group cursor-pointer transform duration-500 hover:-translate-y-1 hover:shadow-xl transition-all ease-in-out">
-        <img class="w-full max-h-[400px] object-cover md:w-80 transition-transform duration-300 ease-in-out group-hover:scale-105" src="seawalking.webp" alt="Sea Walking">
-        <div class="flex-grow">
-            <div class="p-5 pb-10">
-                <h1 class="text-2xl font-semibold text-gray-800 mt-4 group-hover:text-purple-700 transition-colors duration-300 ease-in-out">Sea Walking</h1>
-                <!-- <p class="text-xl text-gray-400 mt-2 leading-relaxed">
-                    20 min coast of KK City
-                </p> -->
-                <p class="text-lg text-gray-600 mt-4">
-                    <span class="text-gray-900 font-bold">from RM 250 / pax</span>
-                </p>
-                <!-- Truncated Description for Smaller Screens -->
-                <p class="text-base text-gray-500 mt-2 md:hidden">
-                    Bring the whole family along – mom, dad, the kids, and even grandpa! It's an adventure everyone can enjoy...
-                </p>
-                <!-- Full Description for Larger Screens -->
-                <p class="hidden md:block text-base text-gray-500 mt-2">
-                    Bring the whole family along – mom, dad, the kids, and even grandpa! It's an adventure everyone can enjoy together. Suitable for ages 10 and up, up to six people can take part at once. Ladies, no need to fret about your makeup – you’ll stay completely dry from the neck up!
-                </p>
-            </div>
-            <div class="bg-blue-50 p-5">
-                <div class="sm:flex sm:justify-between items-center">
-                    <div>
-                        <div class="flex items-center">
-                            <div class="flex">
-                                <svg class="w-4 h-4 mx-px fill-current text-green-600" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14 14">
-                                    <path d="M6.43 12l-2.36 1.64a1 1 0 0 1-1.53-1.11l.83-2.75a1 1 0 0 0-.35-1.09L.73 6.96a1 1 0 0 1 .59-1.8l2.87-.06a1 1 0 0 0 .92-.67l.95-2.71a1 1 0 0 1 1.88 0l.95 2.71c.13.4.5.66.92.67l2.87.06a1 1 0 0 1 .59 1.8l-2.3 1.73a1 1 0 0 0-.34 1.09l.83 2.75a1 1 0 0 1-1.53 1.1L7.57 12a1 1 0 0 0-1.14 0z"></path>
-                                </svg>
-                            </div>
-                            <div class="text-gray-600 ml-2 text-sm md:text-base mt-1">Suitable For Family Activity</div>
-                        </div>
-                    </div>
-                    <button class="mt-3 sm:mt-0 py-2 px-5 md:py-3 md:px-6 bg-purple-700 hover:bg-purple-600 font-bold text-white md:text-lg rounded-lg shadow-md transition-transform transform hover:scale-105">
-                        <a href="https://booking.jskborneoreef.my/JSKBR/VisitDate.aspx?PageCode=ADDON">Add</a>
-                    </button>
-                </div>
-                <div class="mt-3 text-gray-500 text-sm md:text-xs">
-                    Note: Children under 18 years old must be accompanied by a parent or a guardian. Guests must be at least 8 years old to participate in Sea Walking activity.
-                </div>
-            </div>
-        </div>
-    </article>
-
-    <article class="flex flex-wrap md:flex-nowrap shadow-lg mx-auto max-w-3xl group cursor-pointer transform duration-500 hover:-translate-y-1 hover:shadow-xl transition-all ease-in-out mt-10">
-        <img class="w-full max-h-[400px] object-cover md:w-80 transition-transform duration-300 ease-in-out group-hover:scale-105" src="watersport.webp" alt="Watersport Activity">
-        <div class="flex-grow">
-            <div class="p-5 pb-10">
-                <h1 class="text-2xl font-semibold text-gray-800 mt-4 group-hover:text-purple-700 transition-colors duration-300 ease-in-out">Ocean Escapade</h1>
-                <!-- <p class="text-xl text-gray-400 mt-2 leading-relaxed">
-                    20 min coast of KK City
-                </p> -->
-                <p class="text-lg text-gray-600 mt-4">
-                    <span class="text-gray-900 font-bold">from RM 139 / pax</span><br>
-<!--                      <span class="text-gray-900 font-bold">Child : from RM 50 / pax</span>
-                </p> -->
-                <!-- Truncated Description for Smaller Screens -->
-                <p class="text-base text-gray-500 mt-2 md:hidden">
-                    Activities include kayaking, snorkeling, water inflatable courses, and more. Get ready for a day full of excitement...
-                </p>
-                <!-- Full Description for Larger Screens -->
-                <p class="hidden md:block text-base text-gray-500 mt-2">
-                    Activities include kayaking, snorkeling, water inflatable courses, and more. Get ready for a day full of excitement with our water adventure package, perfect for both thrill-seekers and those looking for a relaxing time on the water.
-                </p>
-            </div>
-            <div class="bg-blue-50 p-5">
-                <div class="sm:flex sm:justify-between items-center">
-                    <div>
-                        <div class="flex items-center">
-                            <div class="flex">
-                                <svg class="w-4 h-4 mx-px fill-current text-green-600" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14 14">
-                                    <path d="M6.43 12l-2.36 1.64a1 1 0 0 1-1.53-1.11l.83-2.75a1 1 0 0 0-.35-1.09L.73 6.96a1 1 0 0 1 .59-1.8l2.87-.06a1 1 0 0 0 .92-.67l.95-2.71a1 1 0 0 1 1.88 0l.95 2.71c.13.4.5.66.92.67l2.87.06a1 1 0 0 1 .59 1.8l-2.3 1.73a1 1 0 0 0-.34 1.09l.83 2.75a1 1 0 0 1-1.53 1.1L7.57 12a1 1 0 0 0-1.14 0z"></path>
-                                </svg>
-                            </div>
-                            <div class="text-gray-600 ml-2 text-sm md:text-base mt-1">Suitable For Family Activity</div>
-                        </div>
-                    </div>
-                    <button class="mt-3 sm:mt-0 py-2 px-5 md:py-3 md:px-6 bg-purple-700 hover:bg-purple-600 font-bold text-white md:text-lg rounded-lg shadow-md transition-transform transform hover:scale-105">
-                        <a href="https://booking.jskborneoreef.my/JSKBR/VisitDate.aspx?PageCode=ADDON">Add</a>
-                    </button>
-                </div>
-                <div class="mt-3 text-gray-500 text-sm md:text-xs">
-                    Note: Children under 18 years old must be accompanied by a parent or a guardian. Guests must be at least 8 years old to participate in Sea Walking activity.
-                </div>
-            </div>
-        </div>
-    </article>
-</section>
-
-
-<div class="gtranslate_wrapper"></div>
-<script>window.gtranslateSettings = {"default_language":"ms","languages":["ms","zh-CN","zh-TW","en"],"wrapper_selector":".gtranslate_wrapper","switcher_horizontal_position":"right","float_switcher_open_direction":"bottom","flag_style":"3d"}</script>
-<script src="https://cdn.gtranslate.net/widgets/latest/float.js" defer></script>
+  <!-- Language Switcher -->
+  <div class="gtranslate_wrapper"></div>
+  <script>
+    window.gtranslateSettings = {
+      "default_language": "ms",
+      "languages": ["ms", "zh-CN", "zh-TW", "en"],
+      "wrapper_selector": ".gtranslate_wrapper",
+      "switcher_horizontal_position": "right",
+      "float_switcher_open_direction": "bottom",
+      "flag_style": "3d"
+    }
+  </script>
+  <script src="https://cdn.gtranslate.net/widgets/latest/float.js" defer></script>
 </body>
 </html>
