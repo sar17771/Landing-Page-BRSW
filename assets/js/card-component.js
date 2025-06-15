@@ -4,11 +4,16 @@ function createFeatureIcon() {
   </svg>`;
 }
 
-function createActivityCard(activity) {
+function createActivityCard(activity, index) {
+  // For the first card, add object-top and object-center to the image
+  const imageClass =
+    index === 0
+      ? 'w-full h-full object-cover object-top object-center'
+      : 'w-full h-full object-cover';
   return `
     <article class="flex flex-col shadow-xl rounded-2xl overflow-hidden group transform duration-500 hover:-translate-y-1 hover:shadow-2xl transition-all ease-in-out bg-white h-full">
       <div class="relative aspect-w-16 aspect-h-9 bg-gray-100">
-        <img class="w-full h-full object-cover" 
+        <img class="${imageClass}" 
              src="${activity.image}" 
              alt="${activity.title}" 
              width="400" 
@@ -46,7 +51,7 @@ function createActivityCard(activity) {
 function renderActivities() {
   const container = document.getElementById('activities-container');
   if (container) {
-    container.innerHTML = activities.map(activity => createActivityCard(activity)).join('');
+    container.innerHTML = activities.map((activity, idx) => createActivityCard(activity, idx)).join('');
   }
 }
 
