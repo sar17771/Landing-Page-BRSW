@@ -1,0 +1,109 @@
+.activity-card {
+  @apply flex flex-col lg:flex-row shadow-xl rounded-2xl overflow-hidden group transform duration-500 hover:-translate-y-1 hover:shadow-2xl transition-all ease-in-out bg-white h-full;
+  transition: transform 0.5s ease-in-out, box-shadow 0.5s ease-in-out;
+}
+
+.activity-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.activity-card-image {
+  @apply lg:w-1/2 relative h-48 md:h-56 lg:h-auto;
+}
+
+.activity-card-image img {
+  @apply w-full h-full object-cover transition-transform duration-300 ease-in-out group-hover:scale-105;
+  transition: transform 0.3s ease-in-out;
+}
+
+.activity-card:hover img {
+  transform: scale(1.05);
+}
+
+.activity-badge {
+  @apply absolute top-4 left-4 text-white px-4 py-2 rounded-full text-sm font-semibold;
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  padding: 0.5rem 1rem;
+  border-radius: 9999px;
+  font-weight: 600;
+  font-size: 0.875rem;
+  color: white;
+}
+
+.activity-badge.blue {
+  @apply bg-blue-500;
+}
+
+.activity-badge.green {
+  @apply bg-green-500;
+}
+
+.activity-card-content {
+  @apply lg:w-1/2 p-4 md:p-6 lg:p-8 flex flex-col flex-grow;
+}
+
+.activity-card-title {
+  @apply text-xl md:text-2xl font-bold text-gray-800 mb-2 group-hover:text-blue-600 transition-colors duration-300 leading-tight;
+}
+
+.activity-card-price {
+  @apply text-base md:text-lg text-gray-600 mb-2 leading-snug;
+}
+
+.activity-card-price span {
+  @apply text-gray-900 font-bold;
+}
+
+.activity-card-description {
+  @apply text-sm md:text-base text-gray-600 mb-3 leading-relaxed;
+}
+
+.activity-features {
+  @apply space-y-1.5 md:space-y-2 mb-3;
+}
+
+.activity-feature-item {
+  @apply flex items-center text-gray-600;
+}
+
+.activity-feature-icon {
+  @apply w-4 h-4 md:w-5 md:h-5 text-green-500 mr-2 flex-shrink-0;
+}
+
+.activity-feature-text {
+  @apply text-sm md:text-base leading-snug;
+}
+
+.activity-card-footer {
+  @apply mt-auto;
+}
+
+.activity-book-button {
+  @apply block w-full bg-blue-500 hover:bg-blue-600 text-white text-center font-bold py-2 md:py-2.5 px-4 md:px-6 rounded-lg shadow-md transition duration-300 transform hover:scale-105;
+}
+
+.activity-note {
+  @apply mt-1.5 text-xs md:text-sm text-gray-500 leading-tight;
+}
+
+/* Feature icon styles */
+.feature-icon {
+  flex-shrink: 0;
+  width: 1.25rem;
+  height: 1.25rem;
+  margin-right: 0.5rem;
+  color: #10B981;
+}
+
+/* Button hover effect */
+.book-now-btn {
+  transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
+}
+
+.book-now-btn:hover {
+  transform: scale(1.05);
+  background-color: #2563EB;
+} 
