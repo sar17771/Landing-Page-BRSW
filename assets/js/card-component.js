@@ -7,7 +7,7 @@ function createFeatureIcon() {
 function createActivityCard(activity) {
   return `
     <article class="flex flex-col lg:flex-row shadow-xl rounded-2xl overflow-hidden group transform duration-500 hover:-translate-y-1 hover:shadow-2xl transition-all ease-in-out bg-white h-full">
-      <div class="lg:w-1/2 relative h-48 md:h-56 lg:h-auto">
+      <div class="lg:w-1/2 relative h-48 md:h-56 lg:h-64">
         <img class="w-full h-full object-cover transition-transform duration-300 ease-in-out group-hover:scale-105" 
              src="${activity.image}" 
              alt="${activity.title}" 
